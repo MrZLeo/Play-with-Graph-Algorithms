@@ -7,7 +7,7 @@ use std::fs;
 pub struct AdjList {
     v: usize,
     e: usize,
-    adj: Vec<LinkedList<usize>>
+    adj: Vec<LinkedList<usize>>,
 }
 
 impl AdjList {
@@ -99,10 +99,3 @@ impl Display for AdjList {
         )
     }
 }
-
-#[cfg(test)]
-mod test_02_06 {
-    use crate::adjlist::AdjList;
-
-}
-
