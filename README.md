@@ -13,5 +13,5 @@ cargo test
 
 运行特定的测试集：
 ```bash
-cargo test -p <name_of_test>
+cargo test <name_of_test>
 ```
