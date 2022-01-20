@@ -4,7 +4,7 @@ mod graph_dfs {
 
     use crate::graph::Graph;
 
-    pub fn dfs(g: Graph) -> Vec<usize> {
+    pub fn dfs(g: &Graph) -> Vec<usize> {
         let mut visited = vec![false; g.v()];
         let mut res = Vec::new();
         __dfs(&g, 0, &mut visited, &mut res);
@@ -27,6 +27,6 @@ use crate::{graph::Graph, graph_dfs::dfs};
 
 pub fn main() {
     let g = Graph::from("g.txt");
-    let res = dfs(g);
+    let res = dfs(&g);
     println!("{:?}", res);
 }
