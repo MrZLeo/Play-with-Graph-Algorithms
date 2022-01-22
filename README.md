@@ -15,3 +15,8 @@ cargo test
 ```bash
 cargo test <name_of_test>
 ```
+
+运行测试的同时显示必要的输出信息：
+```bash
+cargo test -- --nocapture
+```
