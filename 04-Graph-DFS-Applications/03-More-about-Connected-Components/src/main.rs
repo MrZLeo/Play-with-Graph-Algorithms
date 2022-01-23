@@ -55,5 +55,12 @@ pub fn cc_test() {
     assert_eq!(cc::dfs(&g).1, 2);
     assert_eq!(cc::is_connected(&g, 0, 6), true);
     assert_eq!(cc::is_connected(&g, 0, 5), false);
-    println!("{:?}", cc::component(&g));
+    let gc = cc::component(&g);
+    for i in 0..gc.len() {
+        print!("{}: ", i);
+        for v in &gc[i] {
+            print!("{} ", v);
+        }
+        println!();
+    }
 }
