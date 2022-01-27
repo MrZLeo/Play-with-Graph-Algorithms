@@ -4,6 +4,9 @@ mod bipartition_detection {
 
     use crate::graph::Graph;
 
+    /// `colors`: 表示颜色
+    ///     - 0 -> blue
+    ///     - 1 -> green
     pub fn is_bipartition(g: &Graph) -> bool {
         let mut visited = vec![false; g.v()];
         let mut colors = vec![-1; g.v()];
