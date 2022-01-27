@@ -21,7 +21,13 @@ mod bipartition_detection {
         return true;
     }
 
-    fn __dfs(g: &Graph, v: usize, visited: &mut Vec<bool>, colors: &mut Vec<i32>, color: i32) -> bool {
+    fn __dfs(
+        g: &Graph,
+        v: usize,
+        visited: &mut Vec<bool>,
+        colors: &mut Vec<i32>,
+        color: i32,
+    ) -> bool {
         visited[v] = true;
         colors[v] = color;
 
