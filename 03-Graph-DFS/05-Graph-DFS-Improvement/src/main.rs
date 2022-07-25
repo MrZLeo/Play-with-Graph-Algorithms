@@ -50,7 +50,10 @@ mod graph_dfs {
     }
 }
 
-use crate::{graph::Graph, graph_dfs::{dfs, post_dfs}};
+use crate::{
+    graph::Graph,
+    graph_dfs::{dfs, post_dfs},
+};
 
 pub fn main() {
     let g = Graph::from("g.txt");

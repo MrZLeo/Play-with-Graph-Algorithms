@@ -14,7 +14,7 @@ pub struct Graph {
 impl Graph {
     pub fn from(filename: &str) -> Self {
         let file = fs::read_to_string(filename).unwrap();
-        let mut iter = file.split("\n").into_iter();
+        let mut iter = file.split('\n');
         let mut first_line = iter.next().unwrap().split_whitespace();
 
         let v = first_line.next().unwrap().parse::<usize>().unwrap();
@@ -26,8 +26,8 @@ impl Graph {
             adj: vec![HashSet::new(); v as usize],
         };
 
-        while let Some(line) = iter.next() {
-            if line.len() == 0 {
+        for line in iter {
+            if line.is_empty() {
                 break;
             }
             let mut line = line.split_whitespace();
@@ -47,7 +47,7 @@ impl Graph {
             ret.adj[y].insert(x);
         }
 
-        return ret;
+        ret
     }
 
     pub fn e(&self) -> usize {
@@ -61,7 +61,7 @@ impl Graph {
     pub fn has_edge(&self, v1: usize, v2: usize) -> bool {
         self.validate_vertex(v1);
         self.validate_vertex(v2);
-        return self.adj[v1].contains(&v2);
+        self.adj[v1].contains(&v2)
     }
 
     fn validate_vertex(&self, v: usize) {
