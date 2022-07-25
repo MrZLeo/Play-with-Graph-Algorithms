@@ -45,7 +45,7 @@ impl Bfs for GraphBFS {
             while !q.is_empty() {
                 let v = q.pop_front().unwrap();
                 self.res.push(v);
-                for next in self.graph.adj_edge(v) {
+                for &next in self.graph.adj_edge(v) {
                     if !self.visited[next] {
                         q.push_back(next);
                         self.visited[next] = true;

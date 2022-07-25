@@ -23,13 +23,21 @@ impl Graph {
 
         let mut adj_list: Vec<HashSet<usize>> = vec![HashSet::new(); v];
 
+        // we can't use `self.validate_vertex` here, so we have to define
+        // a closure to do that
+        let validate_vertex = |x| {
+            if x >= v {
+                panic!("vertex {} is not valid", x);
+            }
+        };
+
         for line in lines {
             let mut line = line.split_whitespace();
             let x = line.next().unwrap().parse::<usize>().unwrap();
             let y = line.next().unwrap().parse::<usize>().unwrap();
 
-            Self::validate_vertex(v, x);
-            Self::validate_vertex(v, y);
+            validate_vertex(x);
+            validate_vertex(y);
 
             if x == y {
                 panic!("Self Loop is Detected!");
@@ -47,8 +55,8 @@ impl Graph {
     }
 
     #[inline]
-    fn validate_vertex(bound: usize, v: usize) {
-        if v >= bound {
+    pub fn validate_vertex(&self, v: usize) {
+        if v >= self.v {
             panic!("vertex {} is not valid", v);
         }
     }
@@ -64,19 +72,19 @@ impl Graph {
     }
 
     pub fn has_edge(&self, v1: usize, v2: usize) -> bool {
-        Self::validate_vertex(self.v, v1);
-        Self::validate_vertex(self.v, v2);
+        self.validate_vertex(v1);
+        self.validate_vertex(v2);
         self.adj_list[v1].contains(&v2)
     }
 
-    pub fn adj_edge(&self, v: usize) -> Box<dyn Iterator<Item = usize>> {
-        Self::validate_vertex(self.v, v);
-        Box::new((self.adj_list[v]).clone().into_iter())
+    pub fn adj_edge(&self, v: usize) -> Box<dyn Iterator<Item = &usize> + '_> {
+        self.validate_vertex(v);
+        Box::new(self.adj_list[v].iter())
     }
 
     #[inline]
     pub fn degree(&self, v: usize) -> usize {
-        Self::validate_vertex(self.v, v);
+        self.validate_vertex(v);
         self.adj_list[v].len()
     }
 }
@@ -105,13 +113,9 @@ fn build_graph() {
     assert_eq!(g.v(), 7);
     assert_eq!(g.e(), 9);
 
-    let adj = g.adj_edge(0);
-    let mut vec = Vec::new();
-    for v in adj {
-        vec.push(v);
-    }
+    let mut vec: Vec<&usize> = g.adj_edge(0).collect();
     vec.sort_unstable();
-    assert_eq!(vec, vec![1, 3]);
+    assert_eq!(vec, vec![&1, &3]);
 
     assert!(g.has_edge(1, 6));
     assert!(g.has_edge(5, 6));

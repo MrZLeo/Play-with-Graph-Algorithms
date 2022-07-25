@@ -77,9 +77,9 @@ impl Graph {
         self.adj_list[v1].contains(&v2)
     }
 
-    pub fn adj_edge(&self, v: usize) -> Box<dyn Iterator<Item = usize>> {
+    pub fn adj_edge(&self, v: usize) -> Box<dyn Iterator<Item = &usize> + '_> {
         self.validate_vertex(v);
-        Box::new((self.adj_list[v]).clone().into_iter())
+        Box::new(self.adj_list[v].iter())
     }
 
     #[inline]
@@ -113,13 +113,9 @@ fn build_graph() {
     assert_eq!(g.v(), 7);
     assert_eq!(g.e(), 9);
 
-    let adj = g.adj_edge(0);
-    let mut vec = Vec::new();
-    for v in adj {
-        vec.push(v);
-    }
+    let mut vec: Vec<&usize> = g.adj_edge(0).collect();
     vec.sort_unstable();
-    assert_eq!(vec, vec![1, 3]);
+    assert_eq!(vec, vec![&1, &3]);
 
     assert!(g.has_edge(1, 6));
     assert!(g.has_edge(5, 6));
