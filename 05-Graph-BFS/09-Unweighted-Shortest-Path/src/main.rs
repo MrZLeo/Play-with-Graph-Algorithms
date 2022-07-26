@@ -1,7 +1,7 @@
 use graph::Graph;
 use graph_bfs::GraphBFS;
 
-use crate::{graph_bfs::SingleSourcePath, unweighted_shortest_path::Usssp};
+use crate::unweighted_shortest_path::{SingleSourcePath, Usssp};
 
 mod graph;
 mod graph_bfs;

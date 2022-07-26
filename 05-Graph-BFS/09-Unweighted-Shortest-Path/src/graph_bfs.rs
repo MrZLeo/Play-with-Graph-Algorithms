@@ -1,12 +1,9 @@
 use std::collections::VecDeque;
 
-use crate::{graph::Graph, unweighted_shortest_path::Usssp};
-
-pub trait SingleSourcePath {
-    fn single_source_path(&mut self);
-    fn is_connected(&mut self, t: usize) -> bool;
-    fn path(&mut self, t: usize) -> Box<dyn Iterator<Item = usize>>;
-}
+use crate::{
+    graph::Graph,
+    unweighted_shortest_path::{SingleSourcePath, Usssp},
+};
 
 pub struct GraphBFS {
     source: usize,
@@ -94,9 +91,9 @@ impl SingleSourcePath for GraphBFS {
 }
 
 impl Usssp for GraphBFS {
-    fn dis(&self, t: usize) -> i32 {
+    fn dis(&mut self, t: usize) -> i32 {
         if !self.is_computed {
-            panic!("Must calculate by single_source_path at first");
+            self.single_source_path();
         }
         self.graph.validate_vertex(t);
         self.dis[t]
