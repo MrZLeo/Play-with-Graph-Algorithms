@@ -74,7 +74,7 @@ cargo test -- --nocapture
 | 5-8 BFS 的重要性质 | [无] |
 | 5-9 无权图的最短路径 | [Rust](05-Graph-BFS/09-Unweighted-Shortest-Path/src/) |
 | 5-10 DFS 和 BFS 的神奇联系，与本章小结 | [无] |
-| **第六章 图论问题建模和 Floodfill** | [章节 Rust 源码](06-Graph-Model-Problem/) |
+| **第六章 图论问题建模和 Floodfill** | [章节 Rust 源码](06-Graph-Modelling-and-Floodfill/) |
 | 6-1 算法笔试中图论问题的书写 | [Rust](06-Graph-Modelling-and-Floodfill/01-Leetcode-Graph-Basics/src/) |
 | 6-2 图的建模和二维数组中的小节 | 无 |
 | 6-3 实现图的建模问题 | [Rust](06-Graph-Modelling-and-Floodfill/03-Graph-Construction/src/) |
