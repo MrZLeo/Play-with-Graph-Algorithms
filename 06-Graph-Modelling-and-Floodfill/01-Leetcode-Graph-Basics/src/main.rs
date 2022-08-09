@@ -6,10 +6,8 @@ impl Solution {
         let mut color = vec![-1; V];
 
         for v in 0..V {
-            if !visited[v] {
-                if !Solution::dfs(v as i32, 0, &graph, &mut visited, &mut color) {
-                    return false;
-                }
+            if !visited[v] && !Solution::dfs(v as i32, 0, &graph, &mut visited, &mut color) {
+                return false;
             }
         }
 
@@ -45,3 +43,5 @@ impl Solution {
         true
     }
 }
+
+fn main() {}

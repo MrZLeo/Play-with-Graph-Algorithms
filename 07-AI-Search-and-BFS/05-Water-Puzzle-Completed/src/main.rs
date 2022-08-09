@@ -1,4 +1,4 @@
-use std::collections::LinkedList;
+use std::{collections::LinkedList, ops::Index};
 
 struct WaterPuzzle {
     end: i32,
