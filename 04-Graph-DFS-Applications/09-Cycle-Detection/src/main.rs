@@ -17,7 +17,6 @@ mod cycle_detection {
         return false;
     }
 
-
     fn __dfs(g: &Graph, v: usize, visited: &mut Vec<bool>, pre: usize) -> bool {
         visited[v] = true;
 
@@ -31,10 +30,9 @@ mod cycle_detection {
 
         return false;
     }
-
 }
 
-use crate::{graph::Graph, cycle_detection::has_cycle};
+use crate::{cycle_detection::has_cycle, graph::Graph};
 
 pub fn main() {}
 
