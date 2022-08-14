@@ -6,7 +6,6 @@ use crate::{edge::Edge, graph::Graph};
 pub trait FindBridges {
     fn bridges(&mut self) -> Vec<Edge>;
 }
-
 pub struct FindBridgesImpl {
     g: Graph,
     visited: Vec<bool>,
@@ -41,7 +40,7 @@ impl FindBridgesImpl {
             if !self.visited[w] {
                 self.dfs(w, v);
                 self.low[v] = usize::min(self.low[v], self.low[w]);
-                if self.low[w] > self.low[v] {
+                if self.low[w] > self.ord[v] {
                     // find a bridge
                     self.res.push(Edge::new(v, w));
                 }
