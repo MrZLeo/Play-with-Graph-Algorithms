@@ -16,7 +16,6 @@ impl Solution {
             c = C;
         }
         let mut start = 0;
-        let mut visited = vec![vec![false; c]; r];
         let mut left = r * c;
 
         for i in 0..r {
@@ -35,16 +34,15 @@ impl Solution {
             }
         }
 
-        Solution::dfs(start, left, &mut visited, &mut grid)
+        Solution::dfs(start, left, 0, &mut grid)
     }
 
-    fn dfs(start: usize, left: usize, visited: &mut [Vec<bool>], grid: &mut [Vec<i32>]) -> i32 {
+    fn dfs(start: usize, left: usize, mut visited: usize, grid: &mut [Vec<i32>]) -> i32 {
         unsafe {
             let x = start / C;
             let y = start % C;
-            visited[x][y] = true;
+            visited |= 1 << start;
             if left == 1 && start == END {
-                visited[x][y] = false;
                 return 1;
             }
 
@@ -54,16 +52,15 @@ impl Solution {
             for dir in DIR {
                 let nextx = x as i32 + dir[0];
                 let nexty = y as i32 + dir[1];
+                let next = nextx * C as i32 + nexty;
                 if in_area(nextx, nexty)
-                    && !visited[nextx as usize][nexty as usize]
+                    && (visited & (1 << next)) == 0
                     && grid[nextx as usize][nexty as usize] != -1
                 {
-                    res +=
-                        Solution::dfs((nextx * C as i32 + nexty) as usize, left - 1, visited, grid);
+                    res += Solution::dfs(next as usize, left - 1, visited, grid);
                 }
             }
 
-            visited[x][y] = false;
             res
         }
     }
