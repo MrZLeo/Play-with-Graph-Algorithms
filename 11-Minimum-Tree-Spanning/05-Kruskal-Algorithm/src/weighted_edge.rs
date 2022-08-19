@@ -1,5 +1,7 @@
 #![allow(dead_code)]
 
+use std::fmt::Debug;
+
 pub struct WeightedEdge {
     v: usize,
     w: usize,
@@ -21,5 +23,11 @@ impl WeightedEdge {
 
     pub fn v(&self) -> usize {
         self.v
+    }
+}
+
+impl Debug for WeightedEdge {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(format!("({}-{}: {})", self.v, self.w, self.weight).as_str())
     }
 }

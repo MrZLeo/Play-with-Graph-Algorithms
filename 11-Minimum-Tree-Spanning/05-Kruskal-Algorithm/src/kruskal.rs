@@ -1,4 +1,7 @@
-use crate::{cc::Cc, weighted_edge::WeightedEdge, weighted_graph::WeightedGraph};
+use crate::cc::Cc;
+use crate::union_find::UnionFind;
+use crate::weighted_edge::WeightedEdge;
+use crate::weighted_graph::WeightedGraph;
 
 pub trait Kruskal {
     fn mst(&self) -> Vec<WeightedEdge>;
@@ -16,8 +19,6 @@ impl KruskalImpl {
 
 impl Kruskal for KruskalImpl {
     fn mst(&self) -> Vec<WeightedEdge> {
-        let mut mst = Vec::with_capacity(self.g.v() + 1);
-
         let mut cc = Cc::new(self.g.clone());
         if cc.count() > 1 {
             return vec![];
@@ -32,6 +33,17 @@ impl Kruskal for KruskalImpl {
             }
         }
         edges.sort_unstable_by_key(|a| a.weight());
+
+        let mut mst = Vec::with_capacity(self.g.v() + 1);
+        let mut union_find = UnionFind::new(self.g.v());
+        for edge in edges {
+            let v = edge.v();
+            let w = edge.w();
+            if !union_find.is_connected(v, w) {
+                mst.push(edge);
+                union_find.union(v, w);
+            }
+        }
 
         mst
     }
