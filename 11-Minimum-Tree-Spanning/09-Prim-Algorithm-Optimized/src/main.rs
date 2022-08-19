@@ -3,7 +3,6 @@ use weighted_graph::WeightedGraph;
 
 mod cc;
 mod prim;
-mod union_find;
 mod weighted_edge;
 mod weighted_graph;
 

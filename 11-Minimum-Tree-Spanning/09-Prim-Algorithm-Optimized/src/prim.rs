@@ -56,6 +56,8 @@ impl Prim for PrimImpl {
                     ));
                 }
             }
+
+            // move edge into mst, so we need to do it in the end of loop
             mst.push(edge);
         }
         mst
