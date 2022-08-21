@@ -7,18 +7,16 @@ mod bipartition_detection {
     /// `colors`: 表示颜色
     ///     - 0 -> blue
     ///     - 1 -> green
-    pub fn is_bipartition(g: &Graph) -> bool {
+    pub fn is_bipartition(g: &Graph) -> (bool, Option<Vec<i32>>) {
         let mut visited = vec![false; g.v()];
         let mut colors = vec![-1; g.v()];
         for v in 0..g.v() {
-            if visited[v] == false {
-                if __dfs(&g, v, &mut visited, &mut colors, 0) == false {
-                    return false;
-                }
+            if !visited[v] && !__dfs(g, v, &mut visited, &mut colors, 0) {
+                return (false, None);
             }
         }
 
-        return true;
+        (true, Some(colors))
     }
 
     fn __dfs(
@@ -32,8 +30,8 @@ mod bipartition_detection {
         colors[v] = color;
 
         for &w in g.adj_edge(v) {
-            if visited[w] == false {
-                if __dfs(g, w, visited, colors, 1 - color) == false {
+            if !visited[w] {
+                if !__dfs(g, w, visited, colors, 1 - color) {
                     return false;
                 }
             } else if colors[w] == colors[v] {
@@ -41,11 +39,9 @@ mod bipartition_detection {
             }
         }
 
-        return true;
+        true
     }
 }
-
-use crate::{bipartition_detection::is_bipartition, graph::Graph};
 
 pub fn main() {}
 
