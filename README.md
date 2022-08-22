@@ -17,7 +17,7 @@ let mut cur = end;
 while cur != start {
     res.push(cur);
     cur = pre[cur];         // error: cur is i32, here we need usize
-    cur = pre[cur as i32];  // correct: use cur as usize
+    cur = pre[cur as usize];  // correct: use cur as usize
 }
 res.push(cur);
 ```
