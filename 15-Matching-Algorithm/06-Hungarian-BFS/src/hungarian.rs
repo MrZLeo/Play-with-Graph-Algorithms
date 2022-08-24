@@ -36,7 +36,7 @@ impl Hungarian {
         let mut pre = vec![-1; self.g.v()];
         q.push_back(v);
         pre[v] = v as i32;
-        while let Some(_cur) = q.pop_front() {
+        while let Some(v) = q.pop_front() {
             for next in self.g.adj_edge(v) {
                 if pre[next] != -1 {
                     continue;
