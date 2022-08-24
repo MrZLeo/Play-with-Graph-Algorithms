@@ -9,12 +9,12 @@ mod cc {
         let mut cc_count = 0;
         for v in 0..g.v() {
             if visited[v] == -1 {
-                __dfs(&g, v, &mut visited, cc_count);
+                __dfs(g, v, &mut visited, cc_count);
                 cc_count += 1;
             }
         }
 
-        return (visited, cc_count);
+        (visited, cc_count)
     }
 
     fn __dfs(g: &Graph, v: usize, visited: &mut Vec<i32>, ccid: i32) {
@@ -35,7 +35,7 @@ mod cc {
             res[visited[v] as usize].push(v);
         }
 
-        return res;
+        res
     }
 
     pub fn is_connected(g: &Graph, v: usize, w: usize) -> bool {
@@ -44,8 +44,6 @@ mod cc {
         visited[v] == visited[w]
     }
 }
-
-use crate::{cc::dfs, graph::Graph};
 
 pub fn main() {}
 

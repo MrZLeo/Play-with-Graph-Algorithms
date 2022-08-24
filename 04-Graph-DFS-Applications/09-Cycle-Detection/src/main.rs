@@ -7,32 +7,28 @@ mod cycle_detection {
     pub fn has_cycle(g: &Graph) -> bool {
         let mut visited = vec![false; g.v()];
         for v in 0..g.v() {
-            if visited[v] == false {
-                if __dfs(&g, v, &mut visited, v) {
-                    return true;
-                }
+            if !visited[v] && __dfs(g, v, &mut visited, v) {
+                return true;
             }
         }
 
-        return false;
+        false
     }
 
     fn __dfs(g: &Graph, v: usize, visited: &mut Vec<bool>, pre: usize) -> bool {
         visited[v] = true;
 
         for &w in g.adj_edge(v) {
-            if visited[w] == false {
+            if !visited[w] {
                 __dfs(g, w, visited, v);
             } else if w != pre {
                 return true;
             }
         }
 
-        return false;
+        false
     }
 }
-
-use crate::{cycle_detection::has_cycle, graph::Graph};
 
 pub fn main() {}
 

@@ -9,13 +9,13 @@ mod cc {
         let mut cc_count = 0;
         for v in 0..g.v() {
             if visited[v] == -1 {
-                __count(&g, v, &mut visited, cc_count);
+                __count(g, v, &mut visited, cc_count);
                 cc_count += 1;
             }
         }
 
         println!("{:?}", visited);
-        return cc_count;
+        cc_count
     }
 
     fn __count(g: &Graph, v: usize, visited: &mut Vec<i32>, ccid: i32) {
@@ -28,8 +28,6 @@ mod cc {
         }
     }
 }
-
-use crate::{cc::count, graph::Graph};
 
 pub fn main() {}
 

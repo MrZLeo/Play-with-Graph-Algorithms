@@ -8,8 +8,8 @@ mod single_source_path {
         let mut visited = vec![false; g.v()];
         let mut pre = vec![-1; g.v()];
 
-        __dfs(&g, s, &mut visited, &mut pre, s);
-        return pre;
+        __dfs(g, s, &mut visited, &mut pre, s);
+        pre
     }
 
     fn __dfs(g: &Graph, v: usize, visited: &mut Vec<bool>, pre: &mut Vec<i32>, pre_v: usize) {
@@ -17,7 +17,7 @@ mod single_source_path {
         pre[v] = pre_v as i32;
 
         for &w in g.adj_edge(v) {
-            if visited[w] == false {
+            if !visited[w] {
                 __dfs(g, w, visited, pre, v);
             }
         }
@@ -25,7 +25,7 @@ mod single_source_path {
 
     pub fn is_connected_to(g: &Graph, s: usize, w: usize) -> bool {
         let pre = dfs(g, s);
-        return pre[w] != -1;
+        pre[w] != -1
     }
 
     pub fn path(g: &Graph, s: usize, w: usize) -> Vec<usize> {

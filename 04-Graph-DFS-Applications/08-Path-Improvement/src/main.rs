@@ -11,8 +11,8 @@ mod path {
         let mut visited = vec![false; g.v()];
         let mut pre = vec![-1; g.v()];
 
-        __dfs(&g, s, &mut visited, &mut pre, s, t);
-        return pre;
+        __dfs(g, s, &mut visited, &mut pre, s, t);
+        pre
     }
 
     fn __dfs(
@@ -31,19 +31,17 @@ mod path {
         }
 
         for &w in g.adj_edge(v) {
-            if visited[w] == false {
-                if __dfs(g, w, visited, pre, v, t) {
-                    return true;
-                }
+            if !visited[w] && __dfs(g, w, visited, pre, v, t) {
+                return true;
             }
         }
 
-        return false;
+        false
     }
 
     pub fn is_connected_to(g: &Graph, s: usize, w: usize) -> bool {
         let pre = dfs(g, s, w);
-        return pre[w] != -1;
+        pre[w] != -1
     }
 
     pub fn path(g: &Graph, s: usize, w: usize) -> Vec<usize> {
